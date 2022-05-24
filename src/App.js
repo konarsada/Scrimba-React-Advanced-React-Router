@@ -1,27 +1,28 @@
 import React from "react"
+import Header from "./components/Header"
+import Footer from "./components/Footer"
+import Home from "./pages/Home"
+import Profile from "./pages/profile/Profile"
 
-import {Routes, Route, Link} from "react-router-dom"
+import {Switch, Route} from "react-router-dom"
 
-import Home from "./components/Home"
-import About from "./components/About"
-import Contact from "./components/Contact"
-
-export default function App() {
+function App() {    
     return (
         <div>
-            <nav>
-                <Link to="/">Home</Link>
-                <Link to="/about">About</Link>
-                <Link to="/contact">Contact</Link>
-            </nav>
-
-            <Routes>
-                <Route exact path="/" element={<Home />} />
-
-                <Route path="/about" element={<About />} />
-
-                <Route path="/contact" element={<Contact />} />
-            </Routes>
+            <Header />
+            
+            <Switch>
+                <Route exact path="/">
+                    <Home />
+                </Route>
+                <Route path="/profile">
+                    <Profile/>
+                </Route>
+            </Switch>
+            
+            <Footer />
         </div>
     )
 }
+
+export default App
