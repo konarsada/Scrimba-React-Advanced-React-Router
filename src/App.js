@@ -1,20 +1,29 @@
-import React from "react"
-import Header from "./components/Header"
-import Home from "./pages/Home"
-import ServicesList from "./pages/services/ServicesList"
-import ServiceDetail from "./pages/services/ServiceDetail"
+import React, {useState} from "react"
+import {Link, Switch, Route, Redirect} from "react-router-dom"
 
-import {Switch, Route} from "react-router-dom"
+// https://reacttraining.com/react-router/web/example/auth-workflow
 
-function App() {    
+function App() {
+    const [isLoggedIn, setIsLoggedIn] = useState(false)
     return (
         <div>
-            <Header />
+            <Link to="/">Home</Link>
+            <Link to="/private">Private</Link>
             
             <Switch>
-                <Route exact path="/" component={Home}/>
-                <Route exact path="/services" component={ServicesList}/>
-                <Route path="/services/:serviceId" component={ServiceDetail}/>
+                <Route exact path="/">
+                    <h1>Home page, anyone is allowed here</h1>
+                </Route>
+                <Route path="/private">
+                    {
+                        isLoggedIn ?
+                        <h1>Protected page, must be logged in to be here</h1> :
+                        <Redirect to="/login" />
+                    }
+                </Route>
+                <Route path="/login">
+                    <button onClick={() => setIsLoggedIn(true)}>Log in</button>
+                </Route>
             </Switch>
         </div>
     )
