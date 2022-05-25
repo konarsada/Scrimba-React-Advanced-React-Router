@@ -1,8 +1,8 @@
 import React from "react"
 import Header from "./components/Header"
-import Footer from "./components/Footer"
 import Home from "./pages/Home"
-import Profile from "./pages/profile/Profile"
+import ServicesList from "./pages/services/ServicesList"
+import ServiceDetail from "./pages/services/ServiceDetail"
 
 import {Switch, Route} from "react-router-dom"
 
@@ -12,15 +12,10 @@ function App() {
             <Header />
             
             <Switch>
-                <Route exact path="/">
-                    <Home />
-                </Route>
-                <Route path="/user">
-                    <Profile/>
-                </Route>
+                <Route exact path="/" component={Home}/>
+                <Route exact path="/services" component={ServicesList}/>
+                <Route path="/services/:serviceId" component={ServiceDetail}/>
             </Switch>
-            
-            <Footer />
         </div>
     )
 }
